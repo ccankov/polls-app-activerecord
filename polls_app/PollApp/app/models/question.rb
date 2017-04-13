@@ -12,4 +12,25 @@ class Question < ApplicationRecord
     foreign_key: :question_id,
     class_name: :AnswerChoice
 
+  has_many :responses,
+    through: :answer_choices,
+    source: :responses
+
+  # def results
+  #   choices = answer_choices.includes(:responses)
+  #   answer_freq = Hash.new(0)
+  #   choices.each do |choice|
+  #     answer_freq[choice.text] = choice.responses.length
+  #   end
+  #   answer_freq
+  # end
+
+  def results
+    answer_freqs = self.answer_choices.left_outer_joins(:responses)
+      .select('answer_choices.*, COUNT(responses.answer_id) as freq')
+      .group('answer_choices.id')
+    freq_hash = Hash.new(0)
+    answer_freqs.each {|a| freq_hash[a.text] = a.freq }
+    freq_hash
+  end
 end
