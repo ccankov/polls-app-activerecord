@@ -10,6 +10,7 @@ User.destroy_all
 chris = User.create(user_name: 'Chris')
 brady = User.create(user_name: 'Brady')
 elliot = User.create(user_name: 'Elliot')
+larry = User.create(user_name: 'Larry')
 
 Poll.destroy_all
 p1 = Poll.create(title: 'Favorite color', author_id: chris.id)
@@ -44,3 +45,6 @@ re11 = Response.create(answer_id: ac111.id, user_id: elliot.id)
 re12 = Response.create(answer_id: ac121.id, user_id: elliot.id)
 re21 = Response.create(answer_id: ac211.id, user_id: elliot.id)
 re22 = Response.create(answer_id: ac221.id, user_id: elliot.id)
+larry11 = Response.create(answer_id: ac111.id, user_id: larry.id)
+larry12 = Response.create(answer_id: ac121.id, user_id: larry.id)
+larry21 = Response.create(answer_id: ac211.id, user_id: larry.id)
